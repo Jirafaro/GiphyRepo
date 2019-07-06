@@ -49,7 +49,7 @@ $("#buttons").on("click", "button", function() { // action location what
             "src": results[i].images.original.url,
             "data-still": results[i].images.fixed_height_still.url,
             "data-animate": results[i].images.original.url,
-            "data-state": "still",
+            "data-state": "animate",
             "class": "gif"
           });
 
@@ -62,7 +62,7 @@ $("#buttons").on("click", "button", function() { // action location what
           // pausing gifs by changing the data state of the gif
       $(".gif").on("click", function(){
         var state = $(this).attr("data-state");
-        if (state==="still") {
+        if (state==="animate") {
           var newstate = $(this).attr("data-still");
           $(this).attr("src", newstate);
           $(this).attr("data-state", "still");
