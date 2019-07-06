@@ -1,29 +1,33 @@
 // defining starting interest array 
 let topics = ['Giraffe','Turtle','Shark','Dog'];
 let newdiv; 
-// Populate HTML with Buttons for Index of Array 
+// Populate HTML with starter array  buttons
 
-
+function add(){
+  $('#buttons').empty();
 for (let i = 0; i < topics.length; i++) {
     newdiv = $('<button>');
     newdiv.html(topics[i]);
     $('#buttons').append(newdiv);
-    newdiv.attr('data-animal', topics[i]);
-}
+    newdiv.attr('data-selector', topics[i]);
+}}
+add();
 
-let state = $(this).attr('data-state');
-      if (state==='still') {
-        $(this).attr('src', $(this).attr('data-animage')); 
-        $(this).attr('data-state', 'animate');
-      } else {
-        $(this).attr('src', $(this).attr('data-still;')); 
-        $(this).attr('data-state', 'still');
-      }
+// add new button (search item)
+$('#search-button').on("click", function(e){
+  e.preventDefault(); // look this up later 
+  let newbutton = $('#search-term').val().trim();
+  topics.push(newbutton);
+  add();
+  $('#search-term').val(""); // Clear search box after search
+})
 
-$("button").on("click", function() {
-    var animal = $(this).attr("data-animal");
+// get gifs 
+
+$("#buttons").on("click", "button", function() { // action location what 
+    var selector = $(this).attr("data-selector");
     var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
-      animal + "&api_key=1Ns9jCPWR84TnAwjwsJhJ82r5DHMS8JC&limit=10";
+      selector + "&api_key=1Ns9jCPWR84TnAwjwsJhJ82r5DHMS8JC";
 
     $.ajax({
       url: queryURL,
@@ -31,22 +35,44 @@ $("button").on("click", function() {
     })
       .then(function(response) {
         var results = response.data;
-
-        for (var i = 0; i < results.length; i++) {
+        $('#gifs-appear-here').empty(); // empty previous gifs 
+        console.log(results);
+        for (var i = 0; i < 10; i++) {
           var gifDiv = $("<div>");
 
           var rating = results[i].rating;
 
           var p = $("<p>").text("Rating: " + rating);
 
-          var animalImage = $("<img>");
-          animalImage.attr("src", results[i].images.fixed_height.url);
+          var selectorImage = $("<img>");
+          selectorImage.attr({
+            "src": results[i].images.fixed_height_still.url,
+            "data-still": results[i].images.fixed_height_still.url,
+            "data-animate": results[i].images.original.url,
+            "data-state": "still",
+            "class": "gif"
+          });
 
           gifDiv.prepend(p);
-          gifDiv.prepend(animalImage);
-
+          gifDiv.prepend(selectorImage);
+          
           $("#gifs-appear-here").prepend(gifDiv);
         }
+
+          // pausing gifs by changing the data state of the gif
+      $(".gif").on("click", function(){
+        var state = $(this).attr("data-state");
+        if (state==="still") {
+          var newstate = $(this).attr("data-animate");
+          $(this).attr("src", newstate);
+          $(this).attr("data-state", "animate");
+        } else {
+          var newstate = $(this).attr("data-still");
+          $(this).attr("src", newstate);
+          $(this).attr("data-state", "still");
+        }
+      })
       });
+    
   });
-// make onclick function for buttons
+
