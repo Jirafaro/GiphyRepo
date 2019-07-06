@@ -46,10 +46,10 @@ $("#buttons").on("click", "button", function() { // action location what
 
           var selectorImage = $("<img>");
           selectorImage.attr({
-            "src": results[i].images.original.url,
+            "src": results[i].images.fixed_height_still.url,
             "data-still": results[i].images.fixed_height_still.url,
             "data-animate": results[i].images.original.url,
-            "data-state": "animate",
+            "data-state": "still",
             "class": "gif"
           });
 
@@ -62,14 +62,14 @@ $("#buttons").on("click", "button", function() { // action location what
           // pausing gifs by changing the data state of the gif
       $(".gif").on("click", function(){
         var state = $(this).attr("data-state");
-        if (state==="animate") {
-          var newstate = $(this).attr("data-still");
-          $(this).attr("src", newstate);
-          $(this).attr("data-state", "still");
-        } else {
+        if (state==="still") {
           var newstate = $(this).attr("data-animate");
           $(this).attr("src", newstate);
           $(this).attr("data-state", "animate");
+        } else {
+          var newstate = $(this).attr("data-still");
+          $(this).attr("src", newstate);
+          $(this).attr("data-state", "still");
         }
       })
       });
