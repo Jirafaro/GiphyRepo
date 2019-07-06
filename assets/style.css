@@ -1,5 +1,29 @@
+body {
+    background-color: #222121;
+    color: white;
+}
 .content {
     padding: 20px; 
     text-align: center;
     size: 40px;
+}
+button {
+    font-size: 14px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    width: 170px;
+    margin: 5px;
+    padding: 15px 0;
+    cursor: pointer;
+    transition: all .5s;
+    text-decoration: none;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    background-color: hsl(174, 100%, 29%);
+}
+button:hover{
+    transform: translateY(0) scale(1.5);
 }

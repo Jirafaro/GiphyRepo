@@ -46,7 +46,7 @@ $("#buttons").on("click", "button", function() { // action location what
 
           var selectorImage = $("<img>");
           selectorImage.attr({
-            "src": results[i].images.fixed_height_still.url,
+            "src": results[i].images.original.url,
             "data-still": results[i].images.fixed_height_still.url,
             "data-animate": results[i].images.original.url,
             "data-state": "still",
