@@ -63,13 +63,13 @@ $("#buttons").on("click", "button", function() { // action location what
       $(".gif").on("click", function(){
         var state = $(this).attr("data-state");
         if (state==="still") {
-          var newstate = $(this).attr("data-animate");
-          $(this).attr("src", newstate);
-          $(this).attr("data-state", "animate");
-        } else {
           var newstate = $(this).attr("data-still");
           $(this).attr("src", newstate);
           $(this).attr("data-state", "still");
+        } else {
+          var newstate = $(this).attr("data-animate");
+          $(this).attr("src", newstate);
+          $(this).attr("data-state", "animate");
         }
       })
       });
