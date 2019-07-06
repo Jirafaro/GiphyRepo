@@ -48,7 +48,7 @@ $("#buttons").on("click", "button", function() { // action location what
           selectorImage.attr({
             "src": results[i].images.fixed_height_still.url,
             "data-still": results[i].images.fixed_height_still.url,
-            "data-animate": results[i].images.original.url,
+            "data-animate": results[i].images.fixed_height.url,
             "data-state": "still",
             "class": "gif"
           });
